@@ -1,0 +1,196 @@
+/* Base styles with smooth transitions */
+* {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #1a1a1a;
+}
+
+/* Dark mode styles */
+html.dark body {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+html.dark nav ul li a {
+    color: #f1f5f9;
+}
+
+html.dark nav ul li a:hover {
+    color: #60a5fa;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark p {
+    color: #f1f5f9;
+}
+
+html.dark .text-gray-300 {
+    color: #64748b !important;
+}
+
+html.dark .bg-black {
+    background-color: #3b82f6 !important;
+}
+
+html.dark #darkModeToggle {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+html.dark #darkModeToggle:hover {
+    background-color: #cbd5e1;
+}
+
+/* Theme toggle button animation */
+#darkModeToggle {
+    position: relative;
+    overflow: hidden;
+}
+
+#modeIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icon rotation animation */
+#sunIcon, #moonIcon {
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+#sunIcon.rotating {
+    animation: sunRotate 0.5s ease forwards;
+}
+
+#moonIcon.rotating {
+    animation: moonRotate 0.5s ease forwards;
+}
+
+@keyframes sunRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: rotate(180deg) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes moonRotate {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Background transition overlay animation */
+.theme-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.theme-transition-overlay.active {
+    animation: overlayPulse 0.5s ease;
+}
+
+@keyframes overlayPulse {
+    0% {
+        opacity: 0;
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
+    }
+    50% {
+        opacity: 1;
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 70%);
+    }
+    100% {
+        opacity: 0;
+        background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
+    }
+}
+
+/* Page load slide-up animation */
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+/* Animation delay classes for staggered effect */
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+    animation-delay: 0.6s;
+}
+
+.animation-delay-800 {
+    animation-delay: 0.8s;
+}
+
+/* Page load slide-down animation for nav */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-down {
+    opacity: 0;
+    animation: slideDown 0.8s ease-out forwards;
+}
+
+/* Scroll-triggered animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
