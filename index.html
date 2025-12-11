@@ -31,6 +31,16 @@
         :root.dark #halftoneBackground {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><defs><pattern id=%22dots%22 x=%220%22 y=%220%22 width=%2240%22 height=%2240%22 patternUnits=%22userSpaceOnUse%22><circle cx=%2210%22 cy=%2210%22 r=%221.5%22 fill=%22%23fff%22 opacity=%220.05%22/><circle cx=%2225%22 cy=%2225%22 r=%221%22 fill=%22%23fff%22 opacity=%220.04%22/><circle cx=%2215%22 cy=%2235%22 r=%221.2%22 fill=%22%23fff%22 opacity=%220.06%22/><circle cx=%2235%22 cy=%2215%22 r=%220.8%22 fill=%22%23fff%22 opacity=%220.03%22/><circle cx=%225%22 cy=%225%22 r=%221.3%22 fill=%22%23fff%22 opacity=%220.05%22/></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23dots)%22/><ellipse cx=%2220%25%22 cy=%2215%25%22 rx=%22200%22 ry=%22150%22 fill=%22%23fff%22 opacity=%220.02%22/><ellipse cx=%2280%25%22 cy=%2270%25%22 rx=%22180%22 ry=%22160%22 fill=%22%23fff%22 opacity=%220.02%22/><g opacity=%220.08%22><circle cx=%22200%22 cy=%22150%22 r=%222%22 fill=%22%23fff%22/><circle cx=%22210%22 cy=%22155%22 r=%221.8%22 fill=%22%23fff%22/><circle cx=%22195%22 cy=%22160%22 r=%221.5%22 fill=%22%23fff%22/><circle cx=%22215%22 cy=%22145%22 r=%221.6%22 fill=%22%23fff%22/><circle cx=%22205%22 cy=%22170%22 r=%222%22 fill=%22%23fff%22/><circle cx=%22220%22 cy=%22158%22 r=%221.7%22 fill=%22%23fff%22/><circle cx=%22190%22 cy=%22148%22 r=%221.9%22 fill=%22%23fff%22/><circle cx=%22225%22 cy=%22165%22 r=%221.4%22 fill=%22%23fff%22/></g><g opacity=%220.07%22><circle cx=%221200%22 cy=%22800%22 r=%222%22 fill=%22%23fff%22/><circle cx=%221210%22 cy=%22810%22 r=%221.8%22 fill=%22%23fff%22/><circle cx=%221190%22 cy=%22815%22 r=%221.5%22 fill=%22%23fff%22/><circle cx=%221220%22 cy=%22795%22 r=%221.6%22 fill=%22%23fff%22/><circle cx=%221205%22 cy=%22825%22 r=%222%22 fill=%22%23fff%22/><circle cx=%221225%22 cy=%22805%22 r=%221.7%22 fill=%22%23fff%22/><circle cx=%221185%22 cy=%22805%22 r=%221.9%22 fill=%22%23fff%22/><circle cx=%221215%22 cy=%22820%22 r=%221.4%22 fill=%22%23fff%22/></g></svg>');
         }
+
+        /* Interactive Particles Canvas */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
     </style>
 </head>
 <!-- Desktop Navigation -->
@@ -93,6 +103,8 @@
 <body>
     <div id="halftoneBackground" class="fixed inset-0 pointer-events-none"
         style="background-size: 100px 100px; z-index: 0;"></div>
+    <!-- Interactive Particles Canvas -->
+    <canvas id="particleCanvas"></canvas>
     <section id="Hero" class="px-4 sm:px-6">
         <h1
             class="hero-welcome text-center text-xl sm:text-2xl md:text-3xl pt-24 sm:pt-32 md:pt-36 animate-slide-up relative z-10">
@@ -635,6 +647,175 @@
         document.querySelectorAll('.scroll-animate').forEach(el => {
             observer.observe(el);
         });
+
+        // ========================================
+        // INTERACTIVE PARTICLES SYSTEM
+        // ========================================
+        const particleCanvas = document.getElementById('particleCanvas');
+        const pCtx = particleCanvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        // Particle configuration
+        const particleConfig = {
+            count: 120,           // Number of particles
+            minSize: 2,           // Minimum particle width
+            maxSize: 6,           // Maximum particle width
+            minLength: 8,         // Minimum dash length
+            maxLength: 20,        // Maximum dash length
+            speed: 0.5,           // Base movement speed
+            mouseInfluence: 80,   // How strongly particles react to mouse
+            colors: [
+                'rgba(59, 130, 246, 0.8)',   // Blue
+                'rgba(99, 102, 241, 0.7)',   // Indigo
+                'rgba(59, 130, 246, 0.5)',   // Light blue
+                'rgba(37, 99, 235, 0.6)',    // Darker blue
+                'rgba(96, 165, 250, 0.65)'   // Sky blue
+            ],
+            darkModeColors: [
+                'rgba(96, 165, 250, 0.8)',   // Lighter blue for dark mode
+                'rgba(129, 140, 248, 0.7)',  // Light indigo
+                'rgba(147, 197, 253, 0.5)',  // Very light blue
+                'rgba(59, 130, 246, 0.6)',   // Blue
+                'rgba(165, 180, 252, 0.65)'  // Light violet
+            ]
+        };
+
+        // Resize particle canvas
+        function resizeParticleCanvas() {
+            particleCanvas.width = window.innerWidth;
+            particleCanvas.height = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight,
+                window.innerHeight
+            );
+        }
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * particleCanvas.width;
+                this.y = Math.random() * particleCanvas.height;
+                this.size = Math.random() * (particleConfig.maxSize - particleConfig.minSize) + particleConfig.minSize;
+                this.length = Math.random() * (particleConfig.maxLength - particleConfig.minLength) + particleConfig.minLength;
+                this.speedX = (Math.random() - 0.5) * particleConfig.speed;
+                this.speedY = (Math.random() - 0.5) * particleConfig.speed;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.colorIndex = Math.floor(Math.random() * particleConfig.colors.length);
+            }
+
+            update() {
+                // Mouse interaction
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        // Push particles away from mouse
+                        this.x -= Math.cos(angle) * force * particleConfig.mouseInfluence * 0.05;
+                        this.y -= Math.sin(angle) * force * particleConfig.mouseInfluence * 0.05;
+                        // Add slight rotation when near mouse
+                        this.rotation += force * 0.1;
+                    }
+                }
+
+                // Regular movement
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+
+                // Wrap around edges
+                if (this.x < -this.length) this.x = particleCanvas.width + this.length;
+                if (this.x > particleCanvas.width + this.length) this.x = -this.length;
+                if (this.y < -this.length) this.y = particleCanvas.height + this.length;
+                if (this.y > particleCanvas.height + this.length) this.y = -this.length;
+            }
+
+            draw() {
+                const isDark = document.documentElement.classList.contains('dark');
+                const colors = isDark ? particleConfig.darkModeColors : particleConfig.colors;
+
+                pCtx.save();
+                pCtx.translate(this.x, this.y);
+                pCtx.rotate(this.rotation);
+
+                // Draw dash-like particle
+                pCtx.beginPath();
+                pCtx.roundRect(-this.length / 2, -this.size / 2, this.length, this.size, this.size / 2);
+                pCtx.fillStyle = colors[this.colorIndex];
+                pCtx.fill();
+
+                pCtx.restore();
+            }
+        }
+
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleConfig.count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animate particles
+        function animateParticles() {
+            pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Mouse move handler
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY + window.scrollY;
+        });
+
+        // Mouse leave handler
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Touch support for mobile
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY + window.scrollY;
+            }
+        });
+
+        window.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            resizeParticleCanvas();
+            // Reinitialize particles on significant resize
+            if (Math.abs(particleCanvas.width - window.innerWidth) > 100) {
+                initParticles();
+            }
+        });
+
+        // Start particle system
+        resizeParticleCanvas();
+        initParticles();
+        animateParticles();
     </script>
 </body>
 
