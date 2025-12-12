@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Graphics Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @keyframes halftoneShift {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        #halftoneBackground {
+            animation: halftoneShift 20s linear infinite;
+        }
+
+        /* Light mode - black dots */
+        #halftoneBackground {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><defs><pattern id=%22dots%22 x=%220%22 y=%220%22 width=%2240%22 height=%2240%22 patternUnits=%22userSpaceOnUse%22><circle cx=%2210%22 cy=%2210%22 r=%221.5%22 fill=%22%23000%22 opacity=%220.05%22/><circle cx=%2225%22 cy=%2225%22 r=%221%22 fill=%22%23000%22 opacity=%220.04%22/><circle cx=%2215%22 cy=%2235%22 r=%221.2%22 fill=%22%23000%22 opacity=%220.06%22/><circle cx=%2235%22 cy=%2215%22 r=%220.8%22 fill=%22%23000%22 opacity=%220.03%22/><circle cx=%225%22 cy=%225%22 r=%221.3%22 fill=%22%23000%22 opacity=%220.05%22/></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23dots)%22/></svg>');
+        }
+
+        /* Dark mode - white dots */
+        :root.dark #halftoneBackground {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><defs><pattern id=%22dots%22 x=%220%22 y=%220%22 width=%2240%22 height=%2240%22 patternUnits=%22userSpaceOnUse%22><circle cx=%2210%22 cy=%2210%22 r=%221.5%22 fill=%22%23fff%22 opacity=%220.05%22/><circle cx=%2225%22 cy=%2225%22 r=%221%22 fill=%22%23fff%22 opacity=%220.04%22/><circle cx=%2215%22 cy=%2235%22 r=%221.2%22 fill=%22%23fff%22 opacity=%220.06%22/><circle cx=%2235%22 cy=%2215%22 r=%220.8%22 fill=%22%23fff%22 opacity=%220.03%22/><circle cx=%225%22 cy=%225%22 r=%221.3%22 fill=%22%23fff%22 opacity=%220.05%22/></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23dots)%22/></svg>');
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div id="halftoneBackground" class="fixed inset-0 pointer-events-none"
+        style="background-size: 100px 100px; z-index: 0;"></div>
+
+    <!-- Back Button -->
+    <a href="index.html"
+        class="fixed top-8 left-8 z-50 flex items-center gap-2 px-5 py-2.5  text-gray-700 dark:text-gray-200 hover:scale-105 transition-all duration-300 group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span class="font-medium">Back to Portfolio</span>
+    </a>
+
+    <!-- Header Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20 mt-10 relative z-10">
+        <h1 class="text-5xl md:text-7xl text-center mb-6 dark:text-white">Graphic Design Portfolio</h1>
+        <p class="text-m text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            A collection of my creative works including branding, social media graphics, and digital art.
+        </p>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="max-w-7xl mx-auto px-6 mb-20 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Placeholder Item 1 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Activity 1.jpg" alt="Project Image"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+
+            <!-- Placeholder Item 2 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Bento Rice Meal Final (1).png" alt="Project Image"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+
+            <!-- Placeholder Item 3 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Activity 3.jpg" alt="Project Image 3"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+            <!-- Placeholder Item 4 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Activity 4.jpg" alt="Project Image 4"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+            <!-- Placeholder Item 5 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Activity 5.jpg" alt="Project Image 5"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+            <!-- Placeholder Item 6 -->
+            <div
+                class="group relative aspect-square bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <img src="Posters/Activity 6.jpg" alt="Project Image 6"
+                    class="w-full h-full object-cover absolute inset-0">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-2">Project Title</h3>
+                    <p class="text-sm">Description of the graphic work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black text-white py-14 mt-10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 grid gap-8 md:grid-cols-2 items-start">
+            <div>
+                <p class="text-sm uppercase tracking-[0.2em] text-gray-400">Let's work together</p>
+                <h3 class="text-3xl font-bold mt-2 mb-4">Have a project or need design help?</h3>
+                <p class="text-gray-300">Reach out for collaborations, freelance projects, or full-time opportunities. I
+                    respond within one business day.</p>
+            </div>
+            <div class="flex flex-col md:items-end gap-3 md:text-right">
+                <a href="mailto:johnmichaelsantos340@gmail.com"
+                    class="text-lg font-semibold hover:text-gray-300 transition-colors">johnmichaelsantos340@gmail.com</a>
+                <a href="tel:+639693420943" class="text-lg hover:text-gray-300 transition-colors">+63 969 342 0943</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-transition-overlay" id="themeOverlay"></div>
+    <button id="darkModeToggle"
+        class="fixed bottom-6 right-6 bg-gray-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full hover:bg-gray-600 transition-colors flex items-center gap-2 shadow-lg z-50">
+        <span id="modeIcon">
+            <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
+                <path stroke="currentColor" stroke-width="2"
+                    d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke="currentColor" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+            </svg>
+        </span>
+        <span id="modeText">Day Mode</span>
+    </button>
+
+    <script>
+        // Copy reusable logic from index.html (Theme, Sidebar)
+        // Tailwind config
+        tailwind.config = { darkMode: 'class' };
+
+        // Sidebar
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+        function toggleSidebar() {
+            const isActive = mobileSidebar.classList.contains('active');
+            if (isActive) closeSidebar();
+            else openSidebar();
+        }
+
+        function openSidebar() {
+            hamburgerBtn.classList.add('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            mobileSidebar.classList.add('active');
+            sidebarBackdrop.classList.add('active');
+            document.body.classList.add('sidebar-open');
+        }
+
+        function closeSidebar() {
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            mobileSidebar.classList.remove('active');
+            sidebarBackdrop.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        }
+
+        function closeSidebarAndScroll(event) {
+            closeSidebar();
+            // Just let default anchor behavior happen or smooth scroll if same page
+            const href = event.currentTarget.getAttribute('href');
+            if (href.startsWith('#')) {
+                event.preventDefault();
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', toggleSidebar);
+        sidebarBackdrop.addEventListener('click', closeSidebar);
+
+        // Dark Mode
+        const toggleBtn = document.getElementById('darkModeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const modeText = document.getElementById('modeText');
+        const overlay = document.getElementById('themeOverlay');
+
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            modeText.textContent = 'Night Mode';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const rect = toggleBtn.getBoundingClientRect();
+            const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+            const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+            overlay.style.setProperty('--x', x + '%');
+            overlay.style.setProperty('--y', y + '%');
+
+            overlay.classList.add('active');
+            setTimeout(() => overlay.classList.remove('active'), 500);
+
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+            if (isDark) {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                modeText.textContent = 'Night Mode';
+            } else {
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+                modeText.textContent = 'Day Mode';
+            }
+        });
+    </script>
+</body>
+
+</html>
