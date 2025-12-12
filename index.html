@@ -151,77 +151,57 @@
     <!-- Transition overlay for theme change animation -->
     <div class="theme-transition-overlay" id="themeOverlay"></div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="max-w-7xl mx-auto px-6 py-20 mt-20 scroll-animate">
-        <h2 class="text-5xl text-center mb-4 dark:text-white">Recent Projects</h2>
-        <p class="text-center text-gray-600 dark:text-gray-400 mb-16">Check out some of my latest work</p>
+    <!-- Projects Section - Scroll-Driven Sticky -->
+    <section id="projects" class="projects-section mt-64">
+        <!-- Tall scroll container -->
+        <div class="projects-scroll-track">
+            <!-- Sticky viewport -->
+            <div class="projects-sticky-viewport">
+                <div class="projects-container">
+                    <h2 class="text-5xl text-center mb-4 dark:text-white">Recent Projects</h2>
+                    <p class="text-center text-gray-600 dark:text-gray-400 mb-8">Check out some of my latest work</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('Coffee Corner.png')"></div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold mb-2 dark:text-white">Coffee Corner</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">A full-stack e-commerce coffee shopping platform.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">PHP</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">MySQL</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">XAMPP</span>
-                    </div>
-                    <a href="#"
-                        class="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">View
-                        Project →</a>
-                </div>
-            </div>
+                    <!-- Single display area - content changes via JS -->
+                    <div class="project-display">
+                        <!-- Project Image -->
+                        <div class="project-image-wrapper">
+                            <div class="project-image" id="projectImage"
+                                style="background-image: url('Coffee Corner.png')"></div>
+                            <div class="project-image-frame"></div>
+                        </div>
 
-            <!-- Project 2 -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('tahanan.jpg')"></div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold mb-2 dark:text-white">Tahanan Ng Pagmamahal</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">An Orphanage Management System. Web Based, Best for
-                        handling children records.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">HTML</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">Tailwind</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">FireStore</span>
+                        <!-- Project Info -->
+                        <div class="project-info-wrapper">
+                            <div class="project-text">
+                                <h3 class="project-name" id="projectName">Coffee Corner</h3>
+                                <p class="project-desc" id="projectDesc">A full-stack e-commerce coffee shopping
+                                    platform with user authentication, product catalog, shopping cart, and order
+                                    management functionality.</p>
+                            </div>
+                            <div class="project-actions">
+                                <div class="project-tech" id="projectTech">
+                                    <span class="tech-badge"><img src="" alt="HTML" class="tech-logo"></span>
+                                    <span class="tech-badge"><img src="" alt="CSS" class="tech-logo"></span>
+                                    <span class="tech-badge"><img src="" alt="PHP" class="tech-logo"></span>
+                                </div>
+                                <a href="#" class="project-view-link" id="projectLink">
+                                    View Project
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 17L17 7M7 7h10v10" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://tahananngpagmamahal.capstone-two.com/"
-                        class="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">View
-                        Project →</a>
-                </div>
-            </div>
 
-            <!-- Project 3 -->
-            <div
-                class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="h-48 bg-cover bg-center" style="background-image: url('RootedKnowldge.png')"></div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold mb-2 dark:text-white">RootedKnowldge</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Learning Site about arrowroot and the festival of
-                        Bustos (Note: This is only the old version)</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">Photoshop</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">After
-                            Effects</span>
-                        <span
-                            class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm">Premiere
-                            Pro</span>
+                    <!-- Progress dots -->
+                    <div class="project-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
                     </div>
-                    <a href="https://kelmichael.pythonanywhere.com/?fbclid=IwY2xjawOmCkZleHRuA2FlbQIxMABicmlkETFvNmVXUEFyTXYya29UcjNwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvCRTNO40F53EX1_mbL_etZF59dazwVSrDh3HgYm-Q_ryl85Rsi5IOW7pEdq_aem_GLGgdQ_e6AztvOAqO4weGw"
-                        class="text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">View
-                        Project →</a>
                 </div>
             </div>
         </div>
@@ -270,6 +250,17 @@
         </div>
     </section>
 
+    <div class="flex justify-center mt-10">
+        <a href="graphics.html"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-600 dark:bg-indigo-500 text-white font-semibold hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors shadow-lg hover:shadow-indigo-500/25">
+            View More
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+        </a>
+    </div>
+
     <!-- About Me Section -->
     <section id="about" class="max-w-7xl mx-auto px-6 py-20 mt-20 scroll-animate">
         <h2 class="text-5xl text-center mb-10 dark:text-white">About Me</h2>
@@ -305,7 +296,7 @@
 
 
         <!-- Design Tools Section -->
-        <div class="mb-16 mt-36 scroll-animate">
+        <div id="graphics" class="mb-16 mt-36 scroll-animate">
             <h3 class="text-3xl font-bold text-center mb-8 dark:text-white">Design & Editing Tools</h3>
             <div class="tools-grid grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
                 <div
@@ -330,6 +321,8 @@
                     <h4 class="text-lg font-semibold text-center dark:text-white">Blender</h4>
                 </div>
             </div>
+
+
         </div>
 
         <!-- Tech Stack Section -->
@@ -816,6 +809,136 @@
         resizeParticleCanvas();
         initParticles();
         animateParticles();
+
+        // ========================================
+        // SCROLL-DRIVEN PROJECTS SECTION
+        // ========================================
+        (function () {
+            // Project data
+            const projects = [
+                {
+                    image: "Coffee Corner.png",
+                    name: "Coffee Corner",
+                    desc: "A full-stack e-commerce coffee shopping platform with user authentication, product catalog, shopping cart, and order management functionality.",
+                    tech: ["HTML", "CSS", "PHP"],
+                    link: "#"
+                },
+                {
+                    image: "tahanan.jpg",
+                    name: "Tahanan Ng Pagmamahal",
+                    desc: "An Orphanage Management System. Web Based, Best for handling children records, donations tracking, and volunteer management with real-time database.",
+                    tech: ["HTML", "Tailwind", "FireStore"],
+                    link: "https://tahananngpagmamahal.capstone-two.com/"
+                },
+                {
+                    image: "RootedKnowldge.png",
+                    name: "RootedKnowledge",
+                    desc: "Learning Site about arrowroot and the festival of Bustos. Features interactive content, video tutorials, and cultural heritage documentation.",
+                    tech: ["Photoshop", "After Effects", "Premiere Pro"],
+                    link: "https://kelmichael.pythonanywhere.com/"
+                }
+            ];
+
+            // DOM elements
+            const section = document.querySelector('.projects-section');
+            const scrollTrack = document.querySelector('.projects-scroll-track');
+            const projectImage = document.getElementById('projectImage');
+            const projectName = document.getElementById('projectName');
+            const projectDesc = document.getElementById('projectDesc');
+            const projectTech = document.getElementById('projectTech');
+            const projectLink = document.getElementById('projectLink');
+            const dots = document.querySelectorAll('.dot');
+
+            let currentIndex = 0;
+            let isAnimating = false;
+
+            // Update displayed project with smooth transition
+            function showProject(index) {
+                if (index === currentIndex || isAnimating) return;
+                if (index < 0 || index >= projects.length) return;
+
+                isAnimating = true;
+                const project = projects[index];
+
+                // Fade out
+                projectImage.classList.add('fade-out');
+                projectName.classList.add('fade-out');
+                projectDesc.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Update content
+                    projectImage.style.backgroundImage = `url('${project.image}')`;
+                    projectName.textContent = project.name;
+                    projectDesc.textContent = project.desc;
+                    projectLink.href = project.link;
+
+                    // Update tech badges
+                    projectTech.innerHTML = project.tech.map(t =>
+                        `<span class="tech-badge">${t}</span>`
+                    ).join('');
+
+                    // Update dots
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+
+                    // Fade in
+                    projectImage.classList.remove('fade-out');
+                    projectName.classList.remove('fade-out');
+                    projectDesc.classList.remove('fade-out');
+
+                    currentIndex = index;
+                    isAnimating = false;
+                }, 300);
+            }
+
+            // Calculate which project should be shown based on scroll
+            function handleScroll() {
+                if (!section || !scrollTrack) return;
+
+                const rect = scrollTrack.getBoundingClientRect();
+                const scrollTop = -rect.top;
+                const scrollHeight = scrollTrack.offsetHeight - window.innerHeight;
+
+                // Only update when we're scrolling within the section
+                if (scrollTop < 0 || scrollTop > scrollHeight) return;
+
+                // Calculate progress (0 to 1)
+                const progress = scrollTop / scrollHeight;
+
+                // Determine project index
+                const segmentSize = 1 / projects.length;
+                let newIndex = Math.floor(progress / segmentSize);
+                newIndex = Math.max(0, Math.min(projects.length - 1, newIndex));
+
+                if (newIndex !== currentIndex) {
+                    showProject(newIndex);
+                }
+            }
+
+            // Dot click handlers
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showProject(index);
+
+                    // Scroll to appropriate position
+                    const scrollHeight = scrollTrack.offsetHeight - window.innerHeight;
+                    const segmentSize = scrollHeight / projects.length;
+                    const targetScroll = section.offsetTop + (segmentSize * index) + (segmentSize / 2);
+
+                    window.scrollTo({
+                        top: targetScroll,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Initialize
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Set initial state
+            dots[0].classList.add('active');
+        })();
     </script>
 </body>
 
